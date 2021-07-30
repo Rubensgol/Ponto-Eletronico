@@ -1,12 +1,12 @@
 <?php
 class Funcionario
 {
-    private string $cpf;
-    private string $nome;
-    private string $email;
-    private string $telefone;
-    private string $digital;
-    private Cargo $cargo;
+    private  $cpf;
+    private  $nome;
+    private  $email;
+    private  $telefone;
+    private  $digital;
+    private  $cargo;
 
     public function getCargo()
     {
@@ -26,6 +26,7 @@ class Funcionario
 
     public function setDigital($digital)
     {
+
         $this->digital = $digital;
     }
     public function getCpf()
@@ -36,6 +37,9 @@ class Funcionario
 
     public function setCpf($cpf)
     {
+        $cpf = trim($cpf);
+        $cpf = str_replace(".", "", $cpf);
+        $cpf = str_replace("-", "", $cpf);
         $this->cpf = $cpf;
     }
 
@@ -71,5 +75,17 @@ class Funcionario
     {
         $this->telefone = $telefone;
     }
+    public function buildFromObj($obj)
+    {
+        $obj = (array)$obj;
+        $this->buildFromArray($obj);
+    }
+
+    public function buildFromArray($arr)
+    {
+        $this->setTelefone($arr['telefone']);
+        $this->setEmail($arr['email']);
+        $this->setNome($arr['nome']);
+        $this->setCpf($arr['cpf']);
+    }
 }
-?>

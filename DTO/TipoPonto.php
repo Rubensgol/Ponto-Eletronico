@@ -1,8 +1,8 @@
-<?
+<?php
 class TipoPonto
 {
-    private int $id;
-    private string $descricao;
+    private  $id;
+    private  $descricao;
 
     public function getDescricao()
     {
@@ -19,10 +19,15 @@ class TipoPonto
     {
         return $this->id;
     }
-
-    public function setId($id)
+    public function buildFromObj($obj)
     {
-        $this->id = $id;
+        $obj = (array)$obj;
+        $this->buildFromArray($obj);
+    }
+
+    public function buildFromArray($arr)
+    {
+        $this->setDescricao($arr['descricao']);
     }
 }
 ?>
