@@ -15,6 +15,7 @@ include '../valida.php';
             <h1 class="h3 mb-3 font-weight-normal">Cadastro do tipo do ponto que vai ser batido</h1>
             <label for="descricao" class="sr-only">Tipo do ponto</label>
             <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Descrição.." required autofocus>
+            <a href="menu.php"  class="btn btn-lg btn-primary">Voltar</a>
             <button name="acao" value="confirmar" class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
         </form>
     </body>

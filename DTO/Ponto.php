@@ -1,29 +1,30 @@
 <?php
 class Ponto
 {
-    private int $id;
-    private DateTime $momento;
-    private TipoRegistro $tipoRegistro;
-    private TipoPonto $tipoPonto;
+    private  $id;
+    private  $momento;
+    private  $registro;
+    private  $funcionario;
+    private  $tiposPonto;
 
-    public function getTipoPonto()
+    public function getFuncionario()
     {
-        return $this->tipoPonto;
+        return $this->funcionario;
     }
 
-    public function setTipoPonto($tipoPonto)
+    public function setFuncionario($funcionario)
     {
-        $this->tipoPonto = $tipoPonto;
+        $this->funcionario = $funcionario;
     }
 
     public function getTipoRegistro()
     {
-        return $this->tipoRegistro;
+        return $this->registro;
     }
 
-    public function setTipoRegistro($tipoRegistro)
+    public function setTipoRegistro($registro)
     {
-        $this->tipoRegistro = $tipoRegistro;
+        $this->registro = $registro;
     }
 
     public function getMomento()
@@ -40,5 +41,33 @@ class Ponto
     public function getId()
     {
         return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function buildFromObj($obj)
+    {
+        $obj = (array)$obj;
+        $this->buildFromArray($obj);
+    }
+
+    public function buildFromArray($arr)
+    {
+        $this->setId($arr['id']);
+        $this->setMomento($arr['momento']);
+    }
+
+    public function getTiposPonto()
+    {
+        return $this->tiposPonto;
+    }
+
+
+    public function setTiposPonto($tiposPonto)
+    {
+        $this->tiposPonto = $tiposPonto;
+
+        return $this;
     }
 }

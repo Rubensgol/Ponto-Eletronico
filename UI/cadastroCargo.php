@@ -18,6 +18,7 @@ require_once "../autoload.php";
             <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Descrição.." required autofocus>
             <label for="atribuicao" class="sr-only">Atribuição</label>
             <input type="text" id="atribuicao" name="atribuicao" class="form-control" placeholder="Atribuicao" required>
+            <a href="menu.php"  class="btn btn-lg btn-primary">Voltar</a>
             <button name="acao" value="confirmar" class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
         </form>
     </body>

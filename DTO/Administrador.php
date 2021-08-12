@@ -1,8 +1,8 @@
 <?
 class Administrador extends Funcionario
 {
-    private string $login;
-    private string $senha;
+    private  $login;
+    private  $senha;
 
 
     public function getSenha()

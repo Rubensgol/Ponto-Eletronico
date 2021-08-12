@@ -38,7 +38,7 @@ if ($acao == "logoff") {
 			session_start();
 			$_SESSION['usuario'] = $usuario;
 			$_SESSION['nome'] = $nome;
-			header("location:index.php");
+			header("location:UI/menu.php");
 		} else {
 
 			header("localtion:UI/login.php");

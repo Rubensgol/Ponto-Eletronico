@@ -46,6 +46,7 @@ include '../conexao/connect.php';
             </select>
         </div>
         <div>
+        <a href="menu.php"  class="btn btn-lg btn-primary">Voltar</a>
             <button type="submit" class="btn btn-lg btn-primary" name="acao" id="acao" value="salvar">Salvar Funcionario</button>
         </div>
     </form>

@@ -16,9 +16,10 @@
 	$dbname="mydb"; // Nome do database
 	$usuario="root"; // Usuário do database
 	$password=""; // Senha do database
-	
+	$senhaEmail="28162816";
 	// Tabelas do Banco de Dados
 	$tb_funcionario = "funcionario";
 	$tb_administrador="administrador";
-	$tb_cargo="cargo"
+	$tb_cargo="cargo";
+    $tb_tipoPonto="tipo_ponto";
 ?>

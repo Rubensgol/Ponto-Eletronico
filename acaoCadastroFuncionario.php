@@ -31,6 +31,7 @@ function inserir()
 function dadosForm()
 {
     $funcionario = new Funcionario;
+    
     $pdo = Conexao::getInstance();
     $crud = Crud::getInstance($pdo, 'cargo');
     $sql = "SELECT * FROM cargo WHERE id_cargo = ?";
@@ -38,6 +39,8 @@ function dadosForm()
     $dados = $crud->getSQLGeneric($sql, $arrayParam, FALSE);
     $cargo = new Cargo;
     $cargo->buildFromObj($dados);
+
+    
     $dados = array();
     $dados['cpf'] = $_POST['cpf'];
     $dados['telefone'] = $_POST['telefone'];
@@ -45,6 +48,5 @@ function dadosForm()
     $dados['email'] = $_POST['email'];
     $funcionario->buildFromArray($dados);
     $funcionario->setCargo($cargo);
-    var_dump($funcionario);
     return $funcionario;
 }
