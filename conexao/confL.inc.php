@@ -9,5 +9,6 @@
 	// Tabelas do Banco de Dados
 	$tb_funcionario = "funcionario";
 	$tb_administrador="administrador";
-	$tb_cargo="cargo"
+	$tb_ponto="ponto";
+	$tb_cargo="cargo";
 ?>

@@ -28,7 +28,7 @@ include_once '../valida.php';
 				<option value="cadastroFuncionario.php" selected> Cadastrar funcionario</option>
 				<option value="cadastroCargo.php"> Cadastrar cargo </option>
 				<option value="cadastroTipoPonto.php"> Cadastrar o tipo de ponto </option>
-				<option value="visualizarRelatorio"> visualizar relatorio </option>
+				<option value="verRelatorio.php"> visualizar relatorio </option>
 			</select>
 		</div>
 		<div class="mudarPagina">

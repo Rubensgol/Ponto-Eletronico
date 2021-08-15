@@ -21,5 +21,6 @@
 	$tb_funcionario = "funcionario";
 	$tb_administrador="administrador";
 	$tb_cargo="cargo";
+    $tb_ponto="ponto";
     $tb_tipoPonto="tipo_ponto";
 ?>
