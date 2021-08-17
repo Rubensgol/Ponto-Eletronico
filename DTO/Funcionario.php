@@ -87,6 +87,6 @@ class Funcionario
         $this->setEmail($arr['email']);
         $this->setNome($arr['nome']);
         $this->setCpf($arr['cpf']);
-        
+        $this->setCargo($arr['cargo_id_cargo']);
     }
 }

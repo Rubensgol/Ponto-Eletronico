@@ -33,15 +33,15 @@ if ($acao == "logoff") {
 			$usuario = $row['login'];
 		}
 
-		#$senha = sha1($senha);
+		$senha = hash("sha512", $senha);
 		if ($senha == $senhaBD) {
 			session_start();
 			$_SESSION['usuario'] = $usuario;
 			$_SESSION['nome'] = $nome;
 			header("location:UI/menu.php");
 		} else {
-
-			header("localtion:UI/login.php");
+			echo "teste";
+			header("location:UI/index.php");
 		}
 	}
 	?>

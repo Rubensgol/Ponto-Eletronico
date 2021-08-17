@@ -3,11 +3,56 @@
 <?php
 include '../conexao/conf.inc.php';
 include '../conexao/connect.php';
+
 ?>
 
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script>
+        function drawChart(array) {
+            var data = google.visualization.arrayToDataTable(array);
+
+            var options = {
+                title: 'Dias trabalhados',
+                legend: {
+                    position: 'none'
+                },
+            };
+
+            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+        function chamarGrafico() {
+            var cpf = $("#funcionarioSelect").val();
+            $.ajax({
+                url: '../montaTabela.php',
+                data: {
+                    cpf: cpf
+                },
+                success: function(response) {
+                    drawChart(response);
+
+                },
+                error: function() {}
+            });
+            return false;
+        }
+
+        function chamaExcel() {
+            window.location.replace("../phpToexcel.php?cpf=" + $("#funcionarioSelect").val());
+
+        }
+
+        function chamaWord() {
+            window.location.replace("../phpToWord.php?cpf=" + $("#funcionarioSelect").val());
+
+        }
+
+
+
         function chamarPhpAjax() {
 
             var select = document.getElementById('funcionarioSelect');
@@ -68,25 +113,27 @@ include '../conexao/connect.php';
 
 <body>
     <div lass="form-group">
-        <form action="../phpToWord.php">
-        <legend>Ver Funcionario:</legend>
-        <input type="text" name="procurar" list="funcionarios" id="procurar" size="37" value="Empresa">
-        <select class="form-control" name="funcionarioSelect" id="funcionarioSelect">
-            <option value="empresa">Empresa</option>
-            <?php
-            $sql = "SELECT * FROM " . $GLOBALS['tb_funcionario'];
-            $result = mysqli_query($GLOBALS['conexao'], $sql);
-            while ($row = mysqli_fetch_array($result)) {
-                echo '<option value="' . $row['cpf'] . '">' . $row['nome'] . '</option>';
-            }
-            ?>
-        </select>
+        <form action="../phpToexcel.php">
+            <legend>Ver Funcionario:</legend>
+            <input type="text" name="procurar" list="funcionarios" id="procurar" size="37" value="">
+            <select class="form-control" name="funcionarioSelect" id="funcionarioSelect">
+                <?php
+                $sql = "SELECT * FROM " . $GLOBALS['tb_funcionario'];
+                $result = mysqli_query($GLOBALS['conexao'], $sql);
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '<option value="' . $row['cpf'] . '">' . $row['nome'] . '</option>';
+                }
+                ?>
+            </select>
 
-        <button type="button" name="acao" id="acao" onclick="return chamarPhpAjax()">Ver relatorio</button>
-        <button type="submit" name="acaoGerarDoc" id="acaoGerarDoc">Gerar relatorio Word</button>
-        <button type="submit" name="acaoGerarDoc" id="acaoGerarDoc">Gerar relatorio Excel</button>
+            <button type="button" name="acao" id="acao" onclick="return chamarPhpAjax()">Ver relatorio</button>
+            <button type="button" name="acao" id="acao" onclick="return chamarGrafico()">Gerar Grafico</button>
+
         </form>
+        <input type="image" src="../img/word.png" class="imagem" style="width:50px;height:50px;" onclick="chamaWord()">
+        <input type="image" src="../img/excel.jpg" class="imagem" style="width:50px;height:50px;" value="excel" onclick="chamaExcel()">
         <table class="result table table-sm table-dark"></table>
+        <div id="chart_div" style="width: 900px; height: 500px;"></div>
     </div>
 
 </body>

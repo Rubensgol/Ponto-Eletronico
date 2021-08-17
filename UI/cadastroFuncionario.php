@@ -15,7 +15,7 @@ include '../conexao/connect.php';
 
 <body>
     <form action="../acaoCadastroFuncionario.php" method="post" class="form-cadastro">
-
+        <INPUT TYPE="hidden" NAME="tipo" VALUE="cadastro">
         <div class="form-group">
             <label for="exampleInputEmail1">Endereço de email</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
@@ -35,18 +35,18 @@ include '../conexao/connect.php';
         <div class="form-group">
             <label for="cargoSelect">Escolha o cargo</label>
             <select class="form-control" name="cargosSelect" id="cargoSelect">
-                <option selected >Escolha o cargo</option>
+                <option selected>Escolha o cargo</option>
                 <?php
                 $sql = "SELECT * FROM " . $GLOBALS['tb_cargo'];
                 $result = mysqli_query($GLOBALS['conexao'], $sql);
                 while ($row = mysqli_fetch_array($result)) {
-                    echo '<option value="' . $row['id_cargo'] . '">'.$row['atribuicao'].'</opition>';
+                    echo '<option value="' . $row['id_cargo'] . '">' . $row['atribuicao'] . '</opition>';
                 }
                 ?>
             </select>
         </div>
         <div>
-        <a href="menu.php"  class="btn btn-lg btn-primary">Voltar</a>
+            <a href="menu.php" class="btn btn-lg btn-primary">Voltar</a>
             <button type="submit" class="btn btn-lg btn-primary" name="acao" id="acao" value="salvar">Salvar Funcionario</button>
         </div>
     </form>

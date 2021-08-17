@@ -5,11 +5,11 @@ include_once 'conexao/conf.inc.php';
 include 'conexao/Crud.class.php';
 include 'DTO/Funcionario.php';
 include 'conexao/connect.php';
-#### TABELA COM OS DADOS GERAIS DA VENDA ####
 funcionario($_GET['cpf']);
+header("location:UI/menu.php");
 function funcionario($CPF)
 {
-    $arquivo = 'relatorio.doc';
+    $arquivo = 'relatorio.xls';
     header('Content-type: text/html;charset=UTF-8');
     #pegar os dados do funcionario para montar a tabela
     $pdo = Conexao::getInstance();
@@ -52,13 +52,12 @@ function funcionario($CPF)
 
     $entradas = 0;
     $saidas = 0;
-    $tothorasTrabalhadas = 0;
-    $mimtrabalhados = 0;
     while ($row = mysqli_fetch_array($result)) {
         $entrada = new DateTime();
         $saida = new DateTime();
         $horastrabalhdas = '';
-
+        $tothorasTrabalhadas = 0;
+        $mimtrabalhados = 0;
         if ($row['registro'] == 'entrada') {
             $entrada = new DateTime($row['momento']);
             $entradas += 1;
@@ -84,8 +83,7 @@ function funcionario($CPF)
     $html .= '<th>Numero de saidas</th>';
     $html .= "<td>" . $saidas . "</td>";
     $html .= '<th>Horas trabalhadas</th>';
-    $html .= "<td>" . $tothorasTrabalhadas . ":" . $mimtrabalhados . "</td>";
-
+    $html .= "<td>" . $tothorasTrabalhadas.":". $mimtrabalhados."</td>";
     if ($tothorasTrabalhadas > 24) {
         $html .= '<th>Dias trabalhados</th>';
         $html .= "<td>" . $tothorasTrabalhadas / 24 . "</td>";
@@ -102,7 +100,7 @@ function finaliza($arquivo, $html)
     header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
     header("Cache-Control: no-cache, must-revalidate");
     header("Pragma: no-cache");
-    header("Content-type: application/vnd.ms-word");
+    header("Content-type: application/x-msexcel");
     header("Content-Disposition: attachment; filename=\"{$arquivo}\"");
     header("Content-Description: PHP Generated Data");
     // Envia o conte�do do arquivo
