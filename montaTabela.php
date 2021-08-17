@@ -4,8 +4,8 @@ include_once 'conexao/conf.inc.php';
 include 'conexao/Crud.class.php';
 include 'DTO/Funcionario.php';
 include 'conexao/connect.php';
-var_dump($_GET);
-#geraArray($_GET['cpf']);
+
+geraArray($_GET['cpf']);
 function geraArray($cpf)
 {
     $pdo = Conexao::getInstance();
@@ -14,12 +14,14 @@ function geraArray($cpf)
     $arrayParam = array($cpf);
     $dados = $crud->getSQLGeneric($sql, $arrayParam, FALSE);
 
-
+    $salva='';
+    
     $sql = "SELECT * FROM " . $GLOBALS['tb_ponto'] . " where funcionario_cpf=$cpf";
     $result = mysqli_query($GLOBALS['conexao'], $sql);
     $horas=0;
     $horastrabalhdas = '';
     $dados = array();
+    $salva.='["15", 15]';
     while ($row = mysqli_fetch_array($result)) {
         $entrada = new DateTime();
         $saida = new DateTime();
@@ -33,10 +35,10 @@ function geraArray($cpf)
             $horastrabalhdas = $saida->diff($entrada);
             
             $tothorasTrabalhadas += $horastrabalhdas->i;
+            $salva.=',["'.$saida->format('d').'", '.$tothorasTrabalhadas.']';
             $dados[$saida->format('d')] = $tothorasTrabalhadas;
                     
         }
     }
-    
-    return $dados;
+    echo json_encode($dados);
 }

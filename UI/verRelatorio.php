@@ -9,11 +9,19 @@ include '../conexao/connect.php';
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-
     <script>
-        function drawChart(array) {
-            var data = google.visualization.arrayToDataTable(array);
+        google.charts.load("current", {
+            packages: ["corechart"]
+        });
 
+        function drawChart(array) {
+            //var data = google.visualization.arrayToDataTable(array);
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'dia');
+            data.addColumn('number', 'minutos_trabalhados');
+            for (var [key, value] of Object.entries(array)) {
+                data.addRows([[key, value]]);
+            }
             var options = {
                 title: 'Dias trabalhados',
                 legend: {
@@ -21,7 +29,7 @@ include '../conexao/connect.php';
                 },
             };
 
-            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
 
@@ -33,8 +41,9 @@ include '../conexao/connect.php';
                     cpf: cpf
                 },
                 success: function(response) {
-                    drawChart(response);
-
+                    var string = response;
+                    var arr = JSON.parse(string);
+                    drawChart(arr);
                 },
                 error: function() {}
             });
@@ -51,10 +60,7 @@ include '../conexao/connect.php';
 
         }
 
-
-
         function chamarPhpAjax() {
-
             var select = document.getElementById('funcionarioSelect');
             var cpf = select.options[select.selectedIndex].value;
             $.ajax({
@@ -69,8 +75,6 @@ include '../conexao/connect.php';
             });
             return false;
         }
-
-
 
         jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
             return this.each(function() {
@@ -133,7 +137,7 @@ include '../conexao/connect.php';
         <input type="image" src="../img/word.png" class="imagem" style="width:50px;height:50px;" onclick="chamaWord()">
         <input type="image" src="../img/excel.jpg" class="imagem" style="width:50px;height:50px;" value="excel" onclick="chamaExcel()">
         <table class="result table table-sm table-dark"></table>
-        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+        <div id="chart_div" style="width: 500px; height: 500px;"></div>
     </div>
 
 </body>
