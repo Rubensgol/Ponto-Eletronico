@@ -23,13 +23,19 @@ include_once '../valida.php';
 <body>
 	<h3 id="relogio"></h3>
 	<div class="form-group">
+	<?php
+	echo "Bem-vindo " . $_SESSION['nome'];
+	echo "<br>";
+	echo "Admin: " . $_SESSION['usuario'];
+	?>
 		<div>
 			<select id="opcaoAcao">
-				<option value="cadastroFuncionario.php" selected> Cadastrar funcionario</option>
-				<option value="cadastroCargo.php"> Cadastrar cargo </option>
-				<option value="cadastroTipoPonto.php"> Cadastrar o tipo de ponto </option>
-				<option value="verRelatorio.php"> visualizar relatorio </option>
-				<option value="editarFuncionario.php"> visualizar relatorio </option>
+				<option value="cadastroFuncionario.php" selected>Cadastrar funcionario</option>
+				<option value="cadastroCargo.php">Cadastrar cargo</option>
+				<option value="cadastroTipoPonto.php">Cadastrar o tipo de ponto</option>
+				<option value="verRelatorio.php">visualizar relatorio Invidual</option>
+				<option value="verRelatorioSetor.php">visualizar relatorio por Setor</option>
+				<option value="editarFuncionario.php">Editar funcionario</option>
 			</select>
 		</div>
 		<div class="mudarPagina">
@@ -37,11 +43,7 @@ include_once '../valida.php';
 			<input  type="button" id="selecionaropcao" name="selecionaropcao" value="Selecionar" onclick="redirecionar()" class=" btn btn-lg btn-primary btn-block">
 		</div>
 	</div>
-	<?php
-	echo "Bem-vindo " . $_SESSION['nome'];
-	echo "<br>";
-	echo "user: " . $_SESSION['usuario'];
-	?>
+
 
 
 	<br>

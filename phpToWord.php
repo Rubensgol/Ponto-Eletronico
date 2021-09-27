@@ -49,25 +49,30 @@ function funcionario($CPF)
     $html .= '<th>Pontos</th>';
     $html .= '</tr>';
     $html .= '<tr>';
-
     $entradas = 0;
     $saidas = 0;
     $tothorasTrabalhadas = 0;
     $mimtrabalhados = 0;
+    $diaTrabalhados=0;
+    $dia=0;
+    $dia2=0;
+    $entrada = new DateTime();
+    $saida = new DateTime();
     while ($row = mysqli_fetch_array($result)) {
-        $entrada = new DateTime();
-        $saida = new DateTime();
+ 
         $horastrabalhdas = '';
 
         if ($row['registro'] == 'entrada') {
             $entrada = new DateTime($row['momento']);
             $entradas += 1;
+            if($entradas==1)
+                $dia=$entrada;
         } else {
             $saida = new DateTime($row['momento']);
             $horastrabalhdas = $saida->diff($entrada);
             $saidas += 1;
             $tothorasTrabalhadas += $horastrabalhdas->h;
-            $mimtrabalhados += $horastrabalhdas->m;
+            $mimtrabalhados += $horastrabalhdas->i;
             if ($mimtrabalhados >= 60) {
                 $tothorasTrabalhadas += 1;
                 $mimtrabalhados -= 60;
@@ -77,19 +82,21 @@ function funcionario($CPF)
         $html .= "<td>" . $row['momento'] . "</td>";
         $html .= "<td>" . $row['registro'] . "</td>";
         $html .= '</tr>';
+        $dia2=$saida;
     }
+    $diaTrabalhados=$dia2->diff($dia);
     $html .= '<tr>';
     $html .= '<th>Numero de entradas</th>';
     $html .= "<td>" . $entradas . "</td>";
     $html .= '<th>Numero de saidas</th>';
     $html .= "<td>" . $saidas . "</td>";
-    $html .= '<th>Horas trabalhadas</th>';
+    $html .= '<th>Total Trabalhado</th>';
     $html .= "<td>" . $tothorasTrabalhadas . ":" . $mimtrabalhados . "</td>";
-
-    if ($tothorasTrabalhadas > 24) {
+    $diaTrabalhados=($diaTrabalhados->d)+1;
+   // if ($tothorasTrabalhadas > 24) {
         $html .= '<th>Dias trabalhados</th>';
-        $html .= "<td>" . $tothorasTrabalhadas / 24 . "</td>";
-    }
+        $html .= "<td>" . $diaTrabalhados . "</td>";
+    //}
     $html .= '</tr>';
     $html .= '</table>';
     finaliza($arquivo, $html);
