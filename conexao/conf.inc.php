@@ -23,4 +23,5 @@
 	$tb_cargo="cargo";
     $tb_ponto="ponto";
     $tb_tipoPonto="tipo_ponto";
+    $tb_setor="setores";
 ?>
