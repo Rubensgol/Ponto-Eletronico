@@ -19,5 +19,4 @@ for ponto in registro:
     pontos=list(map(int,pontos))
     for p in pontos:
         browser.find_element_by_name(p).click()
-    time.sleep(5)
     browser.find_element_by_name(" btnPonto").click()
