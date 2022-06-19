@@ -8,7 +8,7 @@ $acao = '';
 $codigo = '';
 inserir();
 
-
+eyJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImEiOlsyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTUsMTYsMTddLCJlIjoxNjU1NjE0NjE3NzcwLCJ0IjoxLCJ1Ijo5NDc0LCJuIjpbIjkzNzQiXSwiZHQiOlsiKiJdfX0.oIxcC3rPtqNv_ndgOJRO0IrvJFHbBWfZd586VFqhO8M
 // Métodos para cada operação
 function inserir()
 {
